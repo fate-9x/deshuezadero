@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pago con Webpay</title>
+</head>
+
+<body>
+    <h1>Pago con Webpay</h1>
+
+    <form method="post" action="{{url}}">
+        {% csrf_token %}
+        <input type="hidden" name="token_ws" value="{{token}}" />
+        <input type="submit" value="Ir a pagar" />
+    </form>
+</body>
+
+</html>

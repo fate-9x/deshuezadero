@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 django = "==3.1"
+transbank-sdk = "*"
+django-rest-framework = "*"
 
 [dev-packages]
 
