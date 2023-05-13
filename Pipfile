@@ -7,6 +7,9 @@ name = "pypi"
 django = "==3.1"
 transbank-sdk = "*"
 django-rest-framework = "*"
+mysqlclient = {path = "./mysqlclient-1.4.6-cp37-cp37m-win_amd64.whl"}
+django-autoslug = "*"
+jwt = "*"
 
 [dev-packages]
 

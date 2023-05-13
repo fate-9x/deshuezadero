@@ -45,13 +45,21 @@
         <div id="top-header">
             <div class="container">
                 <ul class="header-links pull-left">
-                    <li><a href="#"><i class="fa fa-phone"></i> +569-95-51-84</a></li>
-                    <li><a href="#"><i class="fa fa-envelope-o"></i> millservices@gmail.com</a></li>
-                    <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Dirección</a></li>
-                </ul>
-                <ul class="header-links pull-right">
-                    <li><a href="#"><i class="fa fa-dollar"></i> Pesos</a></li>
-                    <li><a href="{% url 'account_login' %}"><i class="fa fa-user-o"></i> Mi cuenta</a></li>
+
+                    {% if user.is_authenticated %}
+
+                    <li><a href="{% url 'formulario_login' %}"><i class="fa fa-user-o"></i>{{request.user.first_name}} {{request.user.last_name}}</a></li>
+
+                    <li><a href="{% url 'formulario_login' %}"><i class="fa fa-user-o"></i>Cerrar Sesion</a></li>
+
+                    {% else %}
+
+                    <li><a href="{% url 'formulario_login' %}"><i class="fa fa-user-o"></i>Iniciar Sesion</a></li>
+
+                    <li><a href="{% url 'formulario_register' %}"><i class="fa fa-user-o"></i>Registrarse</a></li>
+
+                    {% endif %}
+                    
                 </ul>
                 <li>
                     <div class="header-ctn">
@@ -91,7 +99,7 @@
                                     <h5>SUBTOTAL: $2940.00</h5>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="#">Ver carrito</a>
+                                    <a href="{% url 'store_cart' %}">Ver carrito</a>
                                     <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
@@ -121,7 +129,7 @@
                     <!-- LOGO -->
                     <div>
                         <div class="header-logo">
-                            <a href="#" class="logo">
+                            <a href="{% url 'home_index' %}" class="logo">
                                 <img src="{% static 'img/logo.png' %}" alt="" width="300" height="150">
                             </a>
                         </div>
@@ -217,7 +225,7 @@
                         <div class="footer">
                             <h3 class="footer-title">Servicios</h3>
                             <ul class="footer-links">
-                                <li><a href="{% url 'account_login' %}">Mi cuenta</a></li>
+                                <li><a href="{% url 'formulario_login' %}">Mi cuenta</a></li>
                                 <li><a href="#">Vista del carrito</a></li>
                                 <li><a href="#">Seguimiento de mi pedido</a></li>
                                 <li><a href="#">Ayuda</a></li>
@@ -261,7 +269,7 @@
 
     <!-- jQuery Plugins -->
     <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js ' %}"></script>
     <script src="{% static 'js/slick.min.js' %}"></script>
     <script src="{% static 'js/nouislider.min.js' %}"></script>
     <script src="{% static 'js/jquery.zoom.min.js' %}"></script>
