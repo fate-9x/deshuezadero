@@ -185,6 +185,8 @@ class Repuesto(models.Model):
     tipo_repuesto = models.ForeignKey(TipoRepuesto, models.DO_NOTHING)
     nombre = models.CharField(max_length=100, null=False)
     auto = models.ForeignKey(Auto, models.DO_NOTHING, null=True)
+    precio = models.IntegerField()
+    stock = models.IntegerField()
 
     def __str__(self):
         return self.nombre
@@ -207,3 +209,21 @@ class PermisoCirculacion(models.Model):
         db_table = 'permiso_circulacion'
         verbose_name = 'PermisoCirculacion'
         verbose_name_plural = 'PermisosCirculacion'
+
+
+class Carrito(models.Model):
+
+    user = models.ForeignKey(Cliente, models.DO_NOTHING, null=True)
+    producto = models.ForeignKey(Repuesto, models.DO_NOTHING, null=True)
+    nombre = models.CharField(max_length=100, null=True)
+    precio = models.IntegerField()
+    cantidad = models.IntegerField()
+    suma = models.IntegerField()
+
+    def __str__(self):
+        return self.suma
+
+    class Meta:
+        db_table = 'Carrito'
+        verbose_name = 'carrito'
+        verbose_name_plural = 'carritos'

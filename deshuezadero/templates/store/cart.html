@@ -9,7 +9,7 @@
             <div class="row">
 
                 <!-- Order Details -->
-                <div class="col-md-5 order-details">
+                <div class="order-details">
                     <div class="section-title text-center">
                         <h3 class="title">Tu pedido</h3>
                     </div>
@@ -19,14 +19,18 @@
                             <div><strong>TOTAL</strong></div>
                         </div>
                         <div class="order-products">
+
+                            {% for item in carrito %}
+                            
                             <div class="order-col">
-                                <div>1x Product Name Goes Here</div>
-                                <div>$980.00</div>
+                                <div>{{item.cantidad}}x {{item.nombre}}</div>
+                                <div>${{item.suma}}</div>
+                                <a href="{% url 'delete_product' item.producto_id %}" class="primary-btn">Eliminar</a>
                             </div>
-                            <div class="order-col">
-                                <div>2x Product Name Goes Here</div>
-                                <div>$980.00</div>
-                            </div>
+                            
+                            {% endfor %}
+
+                            
                         </div>
                         <div class="order-col">
                             <div>Envío</div>
@@ -34,11 +38,11 @@
                         </div>
                         <div class="order-col">
                             <div><strong>TOTAL</strong></div>
-                            <div><strong class="order-total">$2940.00</strong></div>
+                            <div><strong class="order-total"></strong></div>
                         </div>
                     </div>
                     <div class="payment-method">
-                        <div class="input-radio">
+                        {% comment %} <div class="input-radio">
                             <input type="radio" name="payment" id="payment-1">
                             <label for="payment-1">
 									<span></span>
@@ -54,7 +58,7 @@
 								<span></span>
 								Acepto los <a href="#">Términos y condiciones</a>
 							</label>
-                        </div>
+                        </div> {% endcomment %}
                         <a href="#" class="primary-btn order-submit">Realizar pedido</a>
                     </div>
                     <!-- /Order Details -->

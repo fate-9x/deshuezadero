@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'deshuezadero.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'deshuezadero',
+        'NAME': 'deshuesadero',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

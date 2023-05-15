@@ -57,6 +57,6 @@ def formulario_register(request):
                                        user_id=u.id,
                                        genero_id=request.POST['genero'],
                                        comuna_id=request.POST['comuna'])
-                return HttpResponseRedirect('account/login/')
+                return HttpResponseRedirect('/account/login/')
 
     return render(request, 'account/register.html', {'form': form, })
