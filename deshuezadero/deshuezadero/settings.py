@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'deshuezadero.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'deshuesadero_pruebas',
+        'NAME': 'deshuesadero_prueba',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
