@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from appDeshuezadero.models import *
+
 
 # Create your views here.
 

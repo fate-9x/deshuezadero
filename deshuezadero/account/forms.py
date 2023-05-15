@@ -2,15 +2,17 @@ from django.db import models
 from django import forms
 from django.forms import ModelForm, PasswordInput
 from appDeshuezadero.models import *
+from utilidades import utilidades as ut
+
 
 generos = []
-comunas = []
+tipos_clientes = []
 
 for genero in Genero.objects.all():
     generos.append((genero.id, genero.nombre))
 
-for comuna in Comuna.objects.all():
-    comunas.append((comuna.id, comuna.nombre))
+for tipo_cliente in TipoCliente.objects.all():
+    tipos_clientes.append((tipo_cliente.id, tipo_cliente.tipo))
 
 
 class Formulario_Login(forms.Form):
@@ -41,5 +43,15 @@ class Formulario_Registro(forms.Form):
     genero = forms.ChoiceField(widget=forms.Select(
         attrs={'class': 'form-select'}), choices=generos)
 
-    comuna = forms.ChoiceField(widget=forms.Select(
-        attrs={'class': 'form-select'}), choices=comunas)
+    region = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Region', 'autocomplete': 'off'}))
+
+    comuna = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Comuna', 'autocomplete': 'off'}))
+
+    foto = forms.ImageField(widget=forms.FileInput())
+
+    tipo_cliente = forms.ChoiceField(widget=forms.Select(
+        attrs={'class': 'form-select'}), choices=tipos_clientes)
+
+# Si al borrar la base de datos y volver a crearla da error 1146, comentar todo el formulario

@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.conf import settings
 import os
 import jwt
-from appDeshuezadero.models import Carrito
+from appDeshuezadero.models import Carrito, Comuna
 
 
 def getToken(json):
@@ -14,6 +14,14 @@ def getItemsCart(user_id):
     carrito_count = Carrito.objects.filter(user_id=user_id).count()
 
     return carrito_count
+
+
+def getComunas(region_id):
+
+    comunas = Comuna.objects.filter(region_id=region_id)
+
+    if comunas.count() > 0:
+        return comunas
 
 
 def get_paginacion(total, request):

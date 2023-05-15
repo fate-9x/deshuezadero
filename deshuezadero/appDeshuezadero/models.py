@@ -110,7 +110,8 @@ class Cliente(models.Model):
     correo = models.CharField(max_length=50, null=False)
     genero = models.ForeignKey(Genero, models.DO_NOTHING, null=True)
     comuna = models.ForeignKey(Comuna, models.DO_NOTHING, null=True)
-    tipo_cliente = models.ForeignKey(TipoCliente, models.DO_NOTHING, null=True)
+    tipo_cliente = models.ForeignKey(
+        TipoCliente, models.DO_NOTHING)
 
     def __str__(self):
         return self.nombre
@@ -142,6 +143,9 @@ class Auto(models.Model):
     marca = models.CharField(max_length=100, null=False)
     modelo = models.CharField(max_length=100, null=False)
     color = models.CharField(max_length=100, null=False)
+    vin = models.CharField(max_length=100, null=True)
+    patente = models.CharField(max_length=100, null=False)
+    precio = models.IntegerField()
 
     def __str__(self):
         return self.modelo
@@ -166,27 +170,13 @@ class DuenoAuto(models.Model):
         verbose_name_plural = 'Duenos_autos'
 
 
-class Patente(models.Model):
-
-    patente = models.CharField(max_length=6, null=False)
-    auto = models.ForeignKey(Auto, models.DO_NOTHING, null=True)
-
-    def __str__(self):
-        return self.patente
-
-    class Meta:
-        db_table = 'patente'
-        verbose_name = 'Patente'
-        verbose_name_plural = 'Patentes'
-
-
 class Repuesto(models.Model):
 
     tipo_repuesto = models.ForeignKey(TipoRepuesto, models.DO_NOTHING)
     nombre = models.CharField(max_length=100, null=False)
-    auto = models.ForeignKey(Auto, models.DO_NOTHING, null=True)
     precio = models.IntegerField()
     stock = models.IntegerField()
+    vendedor = models.ForeignKey(Cliente, models.DO_NOTHING, null=True)
 
     def __str__(self):
         return self.nombre
@@ -195,6 +185,20 @@ class Repuesto(models.Model):
         db_table = 'repuesto'
         verbose_name = 'Repuesto'
         verbose_name_plural = 'Repuestos'
+
+
+class RepuestoFotos(models.Model):
+    foto = models.ImageField(
+        upload_to="uploads/repuestos", default="/")
+    repuesto = models.ForeignKey(Repuesto, models.DO_NOTHING)
+
+    def __str__(self):
+        return 'foto'
+
+    class Meta:
+        db_table = 'repuesto_foto'
+        verbose_name = 'FotoRepuesto'
+        verbose_name_plural = 'FotosRepuestos'
 
 
 class PermisoCirculacion(models.Model):

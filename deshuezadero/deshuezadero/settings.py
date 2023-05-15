@@ -75,10 +75,25 @@ WSGI_APPLICATION = 'deshuezadero.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'deshuesadero',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#         'OPTIONS':
+#             {'charset': 'utf8mb4',
+#              'autocommit': True, },
+#         'ENGINE': 'django.db.backends.mysql',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'deshuesadero',
+        'NAME': 'deshuesadero_pruebas',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -110,8 +125,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # MEDIA
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # Internationalization

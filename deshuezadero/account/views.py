@@ -37,8 +37,10 @@ def formulario_login(request):
 def formulario_register(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('/')
+
     form = Formulario_Registro(request.POST or None)
     if request.method == 'POST':
+
         if form.is_valid:
             exist = User.objects.filter(
                 username=request.POST['correo']).count()
@@ -47,16 +49,34 @@ def formulario_register(request):
                 mensaje = f"El correo ingresado ya existe, por favor ingrese un nuevo correo."
                 messages.add_message(request, messages.WARNING, mensaje)
             else:
-                u = User.objects.create_user(username=request.POST['correo'],
-                                             password=request.POST['password'],
-                                             email=request.POST['correo'],
-                                             first_name=request.POST['nombre'],
-                                             last_name=request.POST['apellido'],
-                                             is_active=1)
-                Cliente.objects.create(correo=request.POST['correo'],
-                                       user_id=u.id,
-                                       genero_id=request.POST['genero'],
-                                       comuna_id=request.POST['comuna'])
-                return HttpResponseRedirect('/account/login/')
+
+                comuna = Comuna.objects.filter(
+                    nombre=request.POST['comuna'].lower()).get()
+                region = Region.objects.filter(
+                    nombre=request.POST['region'].lower()).get()
+
+                if comuna.region_id == region.id:
+
+                    u = User.objects.create_user(username=request.POST['correo'],
+                                                 password=request.POST['password'],
+                                                 email=request.POST['correo'],
+                                                 first_name=request.POST['nombre'],
+                                                 last_name=request.POST['apellido'],
+                                                 is_active=1)
+                    Cliente.objects.create(correo=request.POST['correo'],
+                                           user_id=u.id,
+                                           genero_id=request.POST['genero'],
+                                           comuna_id=comuna.id,
+                                           tipo_cliente_id=request.POST['tipo_cliente'])
+                    return HttpResponseRedirect('/account/login/')
 
     return render(request, 'account/register.html', {'form': form, })
+
+
+def logout_account(request):
+
+    if request.user.is_authenticated:
+
+        logout(request)
+        return HttpResponseRedirect('/')
+    return None

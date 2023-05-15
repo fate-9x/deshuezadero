@@ -47,11 +47,20 @@
             <div class="container">
                 <ul class="header-links pull-left">
 
-                    {% if user.is_authenticated %}
+                    {% if user.is_authenticated and request.user.id|getTipoCliente %}
 
                     <li><a href="{% url 'formulario_login' %}"><i class="fa fa-user-o"></i>{{request.user.first_name}} {{request.user.last_name}}</a></li>
 
-                    <li><a href="{% url 'formulario_login' %}"><i class="fa fa-user-o"></i>Cerrar Sesion</a></li>
+                    <li><a href="{% url 'logout' %}"><i class="fa fa-user-o"></i>Cerrar Sesion</a></li>
+                    
+                    <li><a href="{% url 'form_repuestos' %}"><i class="fa fa-user-o"></i>Vender Repuesto</a></li>
+
+                    {% elif user.is_authenticated %}
+
+                    <li><a href="{% url 'formulario_login' %}"><i class="fa fa-user-o"></i>{{request.user.first_name}} {{request.user.last_name}}</a></li>
+
+                    <li><a href="{% url 'logout' %}"><i class="fa fa-user-o"></i>Cerrar Sesion</a></li>
+                    
 
                     {% else %}
 
@@ -65,6 +74,8 @@
                 <li>
                     <div class="header-ctn">
                         <!-- Cart -->
+
+                        {% if user.is_authenticated %}
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
@@ -88,8 +99,8 @@
                                     {% endfor %}
                                 </div>
                                 <div class="cart-summary">
-                                    <small>3 Item(s) seleccionados</small>
-                                    <h5>SUBTOTAL: $2940.00</h5>
+                                    <small>{{user.id|getItemsCount}} Item(s) seleccionados</small>
+                                    <h5>SUBTOTAL: ${{user.id|getSubTotal}}</h5>
                                 </div>
                                 <div class="cart-btns">
                                     <a href="{% url 'store_cart' %}">Ver carrito</a>
@@ -97,6 +108,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        {% endif %}
                         <!-- /Cart -->
 
                         <!-- Menu Toogle -->
@@ -153,10 +166,9 @@
             <div id="responsive-nav">
                 <!-- NAV -->
                 <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="#">Nosotros</a></li>
-                    <li><a href="#">Subastas</a></li>
+                    <li><a href="#">Nosotros</a></li>
                     <li><a href="#">Vehículos</a></li>
-                    <li><a href="#">Repuestos</a></li>
+                    <li><a href="{% url 'store_repuestos' %}">Repuestos</a></li>
                 </ul>
                 <!-- /NAV -->
             </div>
@@ -183,7 +195,7 @@
                             <h3 class="footer-title">Contactanos</h3>
                             <ul class="footer-links">
                                 <li><a href="#"><i class="fa fa-map-marker"></i>1734 Dirección</a></li>
-                                <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i>+569-954-514-84</a></li>
                                 <li><a href="#"><i class="fa fa-envelope-o"></i>millservices@gmail.com</a></li>
                             </ul>
                         </div>
@@ -194,7 +206,6 @@
                             <h3 class="footer-title">Categorías</h3>
                             <ul class="footer-links">
                                 <li class="active"><a href="#">Nosotros</a></li>
-                                <li><a href="#">Subastas</a></li>
                                 <li><a href="#">Vehículos</a></li>
                                 <li><a href="#">Repuestos</a></li>
                             </ul>

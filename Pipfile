@@ -10,6 +10,7 @@ django-rest-framework = "*"
 mysqlclient = {path = "./mysqlclient-1.4.6-cp37-cp37m-win_amd64.whl"}
 django-autoslug = "==1.9.9"
 jwt = "*"
+pillow = "*"
 
 [dev-packages]
 

@@ -1,6 +1,7 @@
 from django.shortcuts import *
 from appDeshuezadero.models import *
 from django.http import Http404, HttpResponseRedirect, HttpResponse
+from .forms import *
 # Create your views here.
 
 
@@ -8,14 +9,18 @@ def store(request):
 
     productos = Repuesto.objects.all()
 
-    return render(request, 'store/store.html', {'productos': productos})
+    return render(request, 'store/store_repuestos.html', {'productos': productos})
 
 
 def product(request, id):
 
-    producto = Repuesto.objects.get(id=id)
+    producto = Repuesto.objects.filter(id=id)
+    producto_fotos = RepuestoFotos.objects.filter(
+        repuesto_id=producto.get().id)
 
-    return render(request, 'store/product.html', {'producto': producto})
+    print(producto_fotos.get().foto)
+
+    return render(request, 'store/product.html', {'producto': producto.get(), 'producto_fotos': producto_fotos.get()})
 
 
 def createCart(request):
@@ -33,6 +38,7 @@ def createCart(request):
 
                 producto.cantidad = int(producto.cantidad) + \
                     int(request.POST['cantidad'])
+                producto.suma = int(producto.cantidad) * int(datos.precio)
                 producto.save()
 
             except Carrito.DoesNotExist:
@@ -58,3 +64,43 @@ def cart(request):
 
         return render(request, 'store/cart.html', {'carrito': carrito})
     return HttpResponseRedirect('/')
+
+
+def form_repuestos(request):
+
+    if request.user.is_authenticated:
+
+        form = Formulario_Repuestos(request.POST, request.FILES or None)
+        if request.method == 'POST':
+
+            if form.is_valid:
+
+                try:
+
+                    repuesto = Repuesto.objects.filter(
+                        vendedor_id=request.user.id, nombre=request.POST['nombre'])
+
+                    RepuestoFotos.objects.create(
+                        foto=request.FILES.get('foto'), repuesto_id=repuesto.get().id)
+
+                    repuesto.stock = int(repuesto.stock) + \
+                        int(request.POST['stock'])
+
+                    repuesto.save()
+
+                    return HttpResponseRedirect('/store/repuestos/')
+
+                except Repuesto.DoesNotExist:
+                    repuesto = request.POST
+                    r = Repuesto.objects.create(
+                        nombre=repuesto['nombre'], stock=repuesto['stock'], precio=repuesto['precio'], tipo_repuesto_id=repuesto['tipo_repuesto'], vendedor_id=request.user.id)
+
+                    RepuestoFotos.objects.create(
+                        foto=request.FILES.get('foto'), repuesto_id=r.id)
+
+                    return HttpResponseRedirect('/store/repuestos/')
+
+        return render(request, 'store/form_repuestos.html', {'form': form})
+
+    else:
+        return HttpResponseRedirect('/')
