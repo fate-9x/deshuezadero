@@ -18,8 +18,6 @@ def product(request, id):
     producto_fotos = RepuestoFotos.objects.filter(
         repuesto_id=producto.get().id)
 
-    print(producto_fotos.get().foto)
-
     return render(request, 'store/product.html', {'producto': producto.get(), 'producto_fotos': producto_fotos.get()})
 
 

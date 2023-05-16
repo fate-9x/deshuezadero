@@ -2,10 +2,10 @@ import requests
 from django.http import JsonResponse
 from django.conf import settings
 from django.shortcuts import *
-from appDeshuezadero.models import Carrito
+from appDeshuezadero.models import *
 
 
-def create_payment(request, ammount):
+def create_payment(request, amount):
     url = "https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.2/transactions"
     headers = {
         "Tbk-Api-Key-Id": settings.WEBPAY_API_KEY,
@@ -15,7 +15,7 @@ def create_payment(request, ammount):
     content = {
         "buy_order": "123asd",
         "session_id": "123cafk",
-        "amount": ammount,
+        "amount": amount,
         "return_url": "http://localhost:8000/webpay/transaction",
     }
     response = requests.post(url, headers=headers, json=content)
@@ -53,9 +53,14 @@ def transaction(request):
     response_json = response.json()
     status = response_json.get("status")
     payment_method = response_json.get("payment_type_code")
-    monto = response_json.get("ammount")
+    monto = response_json.get("amount")
+
+    payment_method_id = TipoPago.objects.filter(tipo=payment_method).get().id
 
     if status == 'AUTHORIZED':
+
+        HistorialPago.objects.create(
+            token=token, cliente_id=request.user.id, tipo_pago_id=payment_method_id, valor_neto=monto)
 
         Carrito.objects.filter(user_id=request.user.id).delete()
 

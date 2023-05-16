@@ -41,7 +41,7 @@ class Formulario_Registro(forms.Form):
         attrs={'class': 'form-control', 'placeholder': 'Contraseña', 'autocomplete': 'off'}))
 
     genero = forms.ChoiceField(widget=forms.Select(
-        attrs={'class': 'form-select'}), choices=generos)
+        attrs={'class': 'form-select input-select'}), choices=generos)
 
     region = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Region', 'autocomplete': 'off'}))
@@ -52,6 +52,6 @@ class Formulario_Registro(forms.Form):
     foto = forms.ImageField(widget=forms.FileInput())
 
     tipo_cliente = forms.ChoiceField(widget=forms.Select(
-        attrs={'class': 'form-select'}), choices=tipos_clientes)
+        attrs={'class': 'form-select input-select'}), choices=tipos_clientes)
 
 # Si al borrar la base de datos y volver a crearla da error 1146, comentar todo el formulario

@@ -127,7 +127,6 @@ class HistorialPago(models.Model):
     token = models.CharField(max_length=64)
     cliente = models.ForeignKey(Cliente, models.DO_NOTHING)
     tipo_pago = models.ForeignKey(TipoPago, models.DO_NOTHING)
-    telefono = models.IntegerField()
     valor_neto = models.IntegerField()
 
     def __str__(self):
@@ -155,6 +154,22 @@ class Auto(models.Model):
         db_table = 'auto'
         verbose_name = 'Auto'
         verbose_name_plural = 'Autos'
+
+
+class AutoFotos(models.Model):
+
+    foto = models.ImageField(
+        upload_to="uploads/autos", default="/")
+
+    auto = models.ForeignKey(Auto, models.DO_NOTHING)
+
+    def __str__(self):
+        return self.auto
+
+    class Meta:
+        db_table = 'auto_foto'
+        verbose_name = 'FotosAutos'
+        verbose_name_plural = 'FotosAutos'
 
 
 class DuenoAuto(models.Model):

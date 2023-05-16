@@ -24,4 +24,4 @@ class Formulario_Repuestos(forms.Form):
         widget=forms.NumberInput(attrs={'class': 'form-control', 'value': '0'}))
 
     tipo_repuesto = forms.ChoiceField(widget=forms.Select(
-        attrs={'class': 'form-select'}), choices=tipos_repuestos)
+        attrs={'class': 'form-select input-select'}), choices=tipos_repuestos)

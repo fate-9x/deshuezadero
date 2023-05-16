@@ -5,7 +5,6 @@ urlpatterns = [
     path('repuestos/', store, name='store_repuestos'),
     path('form-repuestos/', form_repuestos, name='form_repuestos'),
     path('cart/', cart, name='store_cart'),
-    path('checkout/', checkout, name='checkout'),
     path('product/<int:id>', product, name='store_product'),
     path('create-cart/', createCart, name='create_cart'),
     path('delete-item-cart/<int:producto_id>',

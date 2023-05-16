@@ -8,3 +8,5 @@ INSERT INTO `genero` (`id`, `nombre`) VALUES ('1', 'Masculino'), ('2', 'Femenino
 INSERT INTO tipo_repuesto (id, tipo) VALUES (1, 'Tipo Repuesto 1'), ('2', 'Tipo Repuesto 2');
 
 INSERT INTO `tipo_cliente` (`id`, `tipo`) VALUES ('1', 'Cliente'), ('2', 'Vendedor');
+
+INSERT INTO `tipo_pago` (`id`, `tipo`) VALUES (NULL, 'VD'), (NULL, 'VN'), (NULL, 'VC'), (NULL, 'SI'), (NULL, 'S2'), (NULL, 'NC'), (NULL, 'VP');

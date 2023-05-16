@@ -1,5 +1,5 @@
 from django import template
-from appDeshuezadero.models import Carrito, Cliente
+from appDeshuezadero.models import *
 
 
 register = template.Library()
@@ -45,3 +45,21 @@ def getTipoCliente(user_id):
     cliente = Cliente.objects.filter(user_id=user_id).get()
 
     return cliente.tipo_cliente_id == 2
+
+
+@register.filter(name="getFotoRepuesto")
+def getFotoRepuesto(producto_id):
+
+    fotos = RepuestoFotos.objects.filter(
+        repuesto_id=producto_id)
+
+    return fotos.get().foto
+
+
+@register.filter(name="getTipoRepuesto")
+def getTipoRepuesto(tipo_repuesto):
+
+    tipo = TipoRepuesto.objects.filter(
+        id=tipo_repuesto)
+
+    return tipo.get().tipo
