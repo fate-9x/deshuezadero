@@ -49,24 +49,52 @@
 
                     {% if user.is_authenticated and request.user.id|getTipoCliente %}
 
-                    <li><a href="{% url 'formulario_login' %}"><i class="fa fa-user-o"></i>{{request.user.first_name}} {{request.user.last_name}}</a></li>
+                    <li><a href="{% url 'formulario_login' %}"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="#D10024" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                        <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                        <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+                      </svg>{{request.user.first_name}} {{request.user.last_name}}</a></li>
 
-                    <li><a href="{% url 'logout' %}"><i class="fa fa-user-o"></i>Cerrar Sesion</a></li>
+                    <li><a href="{% url 'logout' %}"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-off" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="#D10024" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M8.18 8.189a4.01 4.01 0 0 0 2.616 2.627m3.507 -.545a4 4 0 1 0 -5.59 -5.552" />
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4c.412 0 .81 .062 1.183 .178m2.633 2.618c.12 .38 .184 .785 .184 1.204v2" />
+                        <path d="M3 3l18 18" />
+                      </svg>Cerrar Sesion</a></li>
                     
-                    <li><a href="{% url 'form_repuestos' %}"><i class="fa fa-user-o"></i>Vender Repuesto</a></li>
+                    <li><a href="{% url 'form_repuestos' %}"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tool" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="#D10024" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5" />
+                      </svg>Vender Repuesto</a></li>
 
                     {% elif user.is_authenticated %}
 
                     <li><a href="{% url 'formulario_login' %}"><i class="fa fa-user-o"></i>{{request.user.first_name}} {{request.user.last_name}}</a></li>
 
-                    <li><a href="{% url 'logout' %}"><i class="fa fa-user-o"></i>Cerrar Sesion</a></li>
+                    <li><a href="{% url 'logout' %}"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-off" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="#D10024" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M8.18 8.189a4.01 4.01 0 0 0 2.616 2.627m3.507 -.545a4 4 0 1 0 -5.59 -5.552" />
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4c.412 0 .81 .062 1.183 .178m2.633 2.618c.12 .38 .184 .785 .184 1.204v2" />
+                        <path d="M3 3l18 18" />
+                      </svg>Cerrar Sesion</a></li>
                     
 
                     {% else %}
 
-                    <li><a href="{% url 'formulario_login' %}"><i class="fa fa-user-o"></i>Iniciar Sesion</a></li>
+                    <li><a href="{% url 'formulario_login' %}"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-login" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="#D10024" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                        <path d="M20 12h-13l3 -3m0 6l-3 -3" />
+                      </svg>Iniciar Sesion</a></li>
 
-                    <li><a href="{% url 'formulario_register' %}"><i class="fa fa-user-o"></i>Registrarse</a></li>
+                    <li><a href="{% url 'formulario_register' %}"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="16" height="16" viewBox="0 0 24 24" stroke-width="2.5" stroke="#D10024" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                        <path d="M16 19h6" />
+                        <path d="M19 16v6" />
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+                      </svg>Registrarse</a></li>
 
                     {% endif %}
                     
@@ -78,13 +106,13 @@
                         {% if user.is_authenticated %}
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="#ff4500" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <i><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                     <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                                     <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                                     <path d="M17 17h-11v-14h-2" />
                                     <path d="M6 5l14 1l-1 7h-13" />
-                                  </svg>
+                                </svg></i>                                
                                 <span>Tu carrito</span>
                                 <div class="qty">{{user.id|getCartCount}}</div>
                             </a>
@@ -191,7 +219,7 @@
     <!-- FOOTER -->
     <footer id="footer">
         <!-- top footer -->
-        <div class="section">
+        <div class="section" id="background">
             <!-- container -->
             <div class="container">
                 <!-- row -->
@@ -200,9 +228,20 @@
                         <div class="footer">
                             <h3 class="footer-title">Contactanos</h3>
                             <ul class="footer-links">
-                                <li><a href="#"><i class="fa fa-map-marker"></i>1734 Dirección</a></li>
-                                <li><a href="#"><i class="fa fa-phone"></i>+569-954-514-84</a></li>
-                                <li><a href="#"><i class="fa fa-envelope-o"></i>millservices@gmail.com</a></li>
+                                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="#D10024" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                                    <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+                                  </svg>1734 Dirección</a></li>
+                                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-phone" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="#D10024" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                                  </svg>+569-954-514-84</a></li>
+                                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="#D10024" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
+                                    <path d="M3 7l9 6l9 -6" />
+                                  </svg>millservices@gmail.com</a></li>
                             </ul>
                         </div>
                     </div>
@@ -249,7 +288,7 @@
             <!-- /container -->
         </div>
         <!-- /top footer -->
-
+        <br class="separador">
         <!-- bottom footer -->
         <div id="bottom-footer" class="section">
             <div class="container">
@@ -257,11 +296,20 @@
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <ul class="footer-payments">
-                            <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-                            <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                            <li><a href="#"><svg width="48" height="48" viewBox="0 0 48.00 48.00" xmlns="http://www.w3.org/2000/svg" fill="#15161D" stroke="#15161D" stroke-width="0.00048000000000000007"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.672"></g><g id="SVGRepo_iconCarrier"> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="Layer_7" data-name="Layer 7"> <path d="M43,8H5a2.9,2.9,0,0,0-3,3V37a3,3,0,0,0,3,3H43a3,3,0,0,0,3-3V11A2.9,2.9,0,0,0,43,8ZM8,19.2l.3-.2h2.8a1.1,1.1,0,0,1,1.2.8h0l.5,2.4c0,.2,0,.3-.2.4h-.3a8.8,8.8,0,0,0-4.1-2.9A.5.5,0,0,1,8,19.2ZM14.7,29H12.2a.2.2,0,0,1-.2-.2L9.8,21.5c0-.1,0-.3.2-.3h.3a9.4,9.4,0,0,1,3,3.6h0l.3,1,2.6-6.6c0-.1.1-.2.3-.2h2.2c.1,0,.1.1.2.2s.1.2,0,.2l-4,9.4A.2.2,0,0,1,14.7,29Zm6.5-.3c0,.2-.1.3-.2.3H18.6v-.3l1.6-9.3a.3.3,0,0,1,.3-.3h2.3v.3Zm7.1-5.6c1.5.6,2.2,1.5,2.2,2.6a2.9,2.9,0,0,1-1.3,2.4,6.2,6.2,0,0,1-3.3.9,10,10,0,0,1-2.6-.5c-.2,0-.3-.2-.2-.3l.2-1.5a.2.2,0,0,1,.2-.2h.3a4.5,4.5,0,0,0,2.4.5c.7,0,1.5-.2,1.5-.9s-.3-.7-1.3-1.2-2.3-1.2-2.3-2.6S25.9,19,28.5,19a9.5,9.5,0,0,1,2.1.3.5.5,0,0,1,.2.4l-.3,1.4c0,.1,0,.2-.1.2h-.3a3.2,3.2,0,0,0-1.7-.4h-.1c-1,0-1.5.4-1.5.9S27.4,22.6,28.3,23.1Zm11.6,5.8c0,.1-.1.1-.2.1H37.8l-.3-.2a6.1,6.1,0,0,0-.3-1.3H33.8c-.1.1-.2.6-.5,1.3s-.1.2-.3.2H30.6a.2.2,0,0,1,0-.3l3.8-8.7a1.4,1.4,0,0,1,1.4-.9h1.9c.1,0,.2.1.2.3L40,28.6A.4.4,0,0,1,39.9,28.9ZM36,21.7l-1.4,3.8h2.2l-.6-2.9Z"></path> </g> </g> </g></svg></a></li>
+                            <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-credit-card" width="48" height="48" viewBox="0 0 24 24" stroke-width="1.5" stroke="#15161D" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
+                                <path d="M3 10l18 0" />
+                                <path d="M7 15l.01 0" />
+                                <path d="M11 15l2 0" />
+                              </svg></a></li>
+                            <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-mastercard" width="48" height="48" viewBox="0 0 24 24" stroke-width="1.5" stroke="#15161D" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M14 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                                <path d="M12 9.765a3 3 0 1 0 0 4.47" />
+                                <path d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                              </svg></a></li>
                         </ul>
                         <span class="copyright">
 								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

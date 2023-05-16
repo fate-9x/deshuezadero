@@ -56,14 +56,12 @@ Table OF Contents
 	Typography
 \*----------------------------*/
 
+
 /*----------------------------*\
 
         MI CODIGO
 
 \*----------------------------*/
-
-
-
 
 
 /*----------------------------*\
@@ -75,7 +73,8 @@ Table OF Contents
 body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    color: #333;
+    color: #fff;
+    background-color: #15161D;
 }
 
 h1,
@@ -84,7 +83,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #2B2D42;
+    color: #FFF;
     font-weight: 700;
     margin: 0 0 10px;
 }
@@ -108,6 +107,10 @@ ol {
     margin: 0;
     padding: 0;
     list-style: none
+}
+
+#background {
+    background-color: #1E1F29;
 }
 
 
@@ -336,7 +339,7 @@ textarea.input {
 \*----------------------------*/
 
 .section {
-    background-color: #e5e5e5;
+    background-color: #15161D;
     padding-top: 30px;
     padding-bottom: 30px;
 }
@@ -725,7 +728,6 @@ textarea.input {
     .header-ctn .menu-toggle {
         display: inline-block;
     }
-
     #responsive-nav {
         position: fixed;
         left: 0;
@@ -743,28 +745,23 @@ textarea.input {
         -webkit-transition: 0.2s all;
         transition: 0.2s all;
     }
-
     #responsive-nav.active {
         -webkit-transform: translateX(0%);
         -ms-transform: translateX(0%);
         transform: translateX(0%);
         width: 100%;
     }
-
     .main-nav {
         margin: 0px;
         float: none;
     }
-
     .main-nav>li {
         display: block;
         float: none;
     }
-
     .main-nav>li+li {
         margin-left: 0px;
     }
-
     .main-nav>li>a {
         padding: 15px;
         color: #FFF;
@@ -2259,30 +2256,24 @@ textarea.input {
     #top-header .header-links.pull-left {
         float: none !important;
     }
-
     #top-header .header-links.pull-right {
         float: none !important;
         margin-top: 5px;
     }
-
     .header-logo {
         float: none;
         text-align: center;
     }
-
     .header-logo .logo {
         display: inline-block;
     }
-
     #product-imgs {
         margin-bottom: 60px;
         margin-top: 15px;
     }
-
     #rating {
         text-align: center;
     }
-
     #reviews {
         margin-top: 30px;
         margin-bottom: 30px;
@@ -2294,7 +2285,6 @@ textarea.input {
         float: none;
         margin-top: 10px;
     }
-
     .section-tab-nav li {
         margin-top: 10px;
     }
@@ -2304,12 +2294,10 @@ textarea.input {
     [class*='col-xs'] {
         width: 100%;
     }
-
     .store-grid {
         float: none;
         margin-top: 10px;
     }
-
     .store-pagination {
         float: none;
         margin-top: 10px;
