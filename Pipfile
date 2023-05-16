@@ -4,30 +4,20 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "==3.1"
-transbank-sdk = "==4.0.0"
-django-rest-framework = "==0.1.0"
-django-autoslug = "==1.9.9"
-jwt = "==1.3.1"
-pillow = "*"
 asgiref = "==3.2.10"
 certifi = "==2023.5.7"
 cffi = "==1.15.1"
 charset-normalizer = "==3.1.0"
 cryptography = "==40.0.2"
-djangorestframework = "==3.14.0"
-idna = "==3.4"
-marshmallow = "==3.17.0"
-mysqlclient = {file = "file:///C:/Users/lucas/OneDrive/Documentos/Progra/Integracion/mysqlclient-1.4.6-cp37-cp37m-win_amd64.whl"}
-packaging = "==23.1"
-pycparser = "==2.21"
-pytz = "==2023.3"
-requests = "==2.30.0"
-sqlparse = "==0.4.4"
-typing-extensions = "==4.5.0"
-urllib3 = "==2.0.2"
+django = "==3.1"
+transbank-sdk = "==4.0.0"
+django-rest-framework = "*"
+mysqlclient = {path = "./mysqlclient-1.4.6-cp37-cp37m-win_amd64.whl"}
+django-autoslug = "==1.9.9"
+jwt = "*"
+pillow = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.7"
+python_version = "3.10"
