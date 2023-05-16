@@ -126,13 +126,13 @@
                     <div class="row">
                         <!-- product -->
 
-                        {% for producto in productos %}
+                        {% for auto in autos %}
                         
                         <div class="col-md-4 col-xs-6">
                             <div class="product">
                                 <div class="product-img">
                                     
-                                    <img src="{% static producto.id|getFotoRepuesto %}" alt="">
+                                    <img src="{% static auto.id|getFotoAuto %}" alt="">
                                     
                                     {% comment %} <div class="product-label">
                                         <span class="sale">-30%</span>
@@ -140,9 +140,8 @@
                                     </div> {% endcomment %}
                                 </div>
                                 <div class="product-body">
-                                    <p class="product-category">{{producto.tipo_repuesto_id|getTipoRepuesto}}</p>
-                                    <h3 class="product-name"><a href="#">{{producto.nombre}}</a></h3>
-                                    <h4 class="product-price">${{producto.precio|formatNumber}}{% comment %} <del class="product-old-price">$990.00</del>{% endcomment %}</h4> 
+                                    <h3 class="product-name"><a href="#">{{auto.modelo}}</a></h3>
+                                    <h4 class="product-price">${{auto.precio|formatNumber}}{% comment %} <del class="product-old-price">$990.00</del>{% endcomment %}</h4> 
                                     <div class="product-rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -152,7 +151,7 @@
                                     </div>
                                 </div>
                                 <div class="add-to-cart">
-                                    <a href="{% url 'store_product' producto.id %}" >
+                                    <a href="{% url 'store_auto' auto.id %}" >
                                         <i class="add-to-cart-btn" >Ver producto</i>
                                     </a>
                                 </div>

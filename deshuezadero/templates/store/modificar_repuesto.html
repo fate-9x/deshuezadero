@@ -12,25 +12,44 @@
                     <i class="fa fa-key" aria-hidden="true"></i>
                 </div>
                 <div class="col-lg-12 login-title">
-                    Inicio sesión
+                    Modificar Repuesto
                 </div>
                 <div class="col-lg-12 login-form">
                     <div class="col-lg-12 login-form">
-                        <form name="form_login" method="post" action="{% url 'formulario_login' %}">
+                        <form name="form_repuestos" enctype="multipart/form-data" role="form" method="post" action="{% url 'modificar_repuesto' repuesto.id %}">
                             
                             {% csrf_token %}
                             <div class="form-group">
-                                <label class="form-control-label">Correo</label>
+                                <label class="form-control-label">Foto</label>
 
-                                {{form.correo}}
-
+                                {{form.foto}}
                                 {% comment %} <input type="text" class="form-control"> {% endcomment %}
                             </div>
                             <div class="form-group">
-                                <label class="form-control-label">Contraseña</label>
+                                <label class="form-control-label">Nombre</label>
 
-                                {{form.password}}
+                                <input type="text" name="nombre" class="form-control" placeholder="Nombre" autocomplete="off" value="{{repuesto.nombre}}" required="" id="id_nombre">
 
+                                {% comment %} <input type="password" class="form-control" i> {% endcomment %}
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Precio</label>
+
+                                <input type="number" name="precio" class="form-control" value="{{repuesto.precio}}" required="" id="id_precio">
+
+                                {% comment %} <input type="password" class="form-control" i> {% endcomment %}
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Stock</label>
+
+                                <input type="number" name="stock" class="form-control" value="{{repuesto.stock}}" required="" id="id_stock">
+
+                                {% comment %} <input type="password" class="form-control" i> {% endcomment %}
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Tipo de Repuesto</label>
+                                <br>
+                                {{form.tipo_repuesto}}
                                 {% comment %} <input type="password" class="form-control" i> {% endcomment %}
                             </div>
 
@@ -52,17 +71,10 @@
                 </div>
                 <div class="col-lg-3 col-md-2"></div>
                 <div class="info_div">
-                    <p>Aún no te has registrado? <a href="{% url 'formulario_register' %}" class="info_div_link">Regístrate aquí!</a></p>
+                    <p>Aún no te has registrado? <a href="#" class="info_div_link">Regístrate aquí!</a></p>
                 </div>
             </div>
         </div>
-
-        {% if mensaje != '' %}
-        <div class="alert alert-danger" role="alert">
-            {{mensaje}}
-        </div>
-        {% endif %}
-
 </body>
 
 </html>

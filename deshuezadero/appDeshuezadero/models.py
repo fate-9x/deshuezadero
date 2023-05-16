@@ -146,6 +146,7 @@ class Auto(models.Model):
     vin = models.CharField(max_length=100, null=True)
     patente = models.CharField(max_length=100, null=False)
     precio = models.IntegerField()
+    vendedor = models.ForeignKey(Cliente, models.DO_NOTHING, null=True)
 
     def __str__(self):
         return self.modelo
@@ -235,6 +236,7 @@ class Carrito(models.Model):
 
     user = models.ForeignKey(Cliente, models.DO_NOTHING, null=True)
     producto = models.ForeignKey(Repuesto, models.DO_NOTHING, null=True)
+    auto = models.ForeignKey(Auto, models.DO_NOTHING, null=True)
     nombre = models.CharField(max_length=100, null=True)
     precio = models.IntegerField()
     cantidad = models.IntegerField()

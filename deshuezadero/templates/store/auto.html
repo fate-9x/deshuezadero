@@ -1,9 +1,11 @@
 {% extends '../layout/base.html' %}
 {% load static %}
+{% load utilidades %}
 {% block content %}
 
     <!-- SECTION -->
     <div class="section">
+
         <!-- container -->
         <div class="container">
             <!-- row -->
@@ -12,7 +14,7 @@
                 <div class="col-md-5 col-md-push-2">
                     <div id="product-main-img">
                         <div class="product-preview">
-                            <img src="{% static producto_fotos.foto %}" alt="">asdsad
+                            <img src="{% static auto_fotos.foto %}" alt="">
                         </div>
                     </div>
                 </div>
@@ -34,29 +36,9 @@
                 <!-- Product details -->
                 <div class="col-md-5">
                     <div class="product-details">
-                        <h2 class="product-name">{{producto.nombre}}</h2>
+                        <h2 class="product-name">{{auto.modelo}}</h2>
                         <div>
-                            {% comment %} <div class="product-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <a class="review-link" href="#">10 reseña(s) | Añade tu reseña</a> {% endcomment %}
-                        </div>
-                        <div>
-                            <h3 class="product-price">{{producto.precio|formatNumber}}{% comment %} <del class="product-old-price">$990.00</del>{% endcomment %}</h3>
-
-                            {% if producto.stock > 0 %}
-                            
-                            <span class="product-available">En Stock</span>
-
-                            {% else %}
-
-                            <span class="product-available">Sin Stock</span>
-
-                            {% endif %}
+                            <h3 class="product-price">{{auto.precio|formatNumber}}{% comment %} <del class="product-old-price">$990.00</del>{% endcomment %}</h3>
                             
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -79,25 +61,16 @@
                         <div class="add-to-cart">
                             <form name="agregar_al_carro" action="{% url 'create_cart' %}" method="post">
                                 {% csrf_token %}
-                            <div class="qty-label">
-                                Cantidad
-                                <div class="input-number">
-                                    <input name="cantidad" id="cantidad" value="1" type="number">
-                                    <span class="qty-up">+</span>
-                                    <span class="qty-down">-</span>
-                                </div>
-                            </div>
 
-                                <input type="hidden" name="id" id="id" value="{{producto.id}}">
-                                <input type="hidden" name="nombre" id="nombre" value="{{producto.nombre}}">
+                                <input type="hidden" name="id" id="id" value="{{auto.id}}">
+                                <input type="hidden" name="modelo" id="modelo" value="{{auto.modelo}}">
                                 <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
                             </form>
                         </div>
 
                         <ul class="product-links">
-                            <li>Categoría:</li>
-                            <li><a href="#">Headphones</a></li>
-                            <li><a href="#">Accessories</a></li>
+                            <li>Marca:</li>
+                            <li><a href="#">{{auto.marca}}</a></li>
                         </ul>
 
                     </div>
@@ -349,81 +322,6 @@
                             <div class="product-label">
                                 <span class="sale">-30%</span>
                             </div>
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">Categoría</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            <div class="product-rating">
-                            </div>
-                        </div>
-                        <div class="add-to-cart">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- /product -->
-
-                <!-- product -->
-                <div class="col-md-3 col-xs-6">
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="./img/product02.png" alt="">
-                            <div class="product-label">
-                                <span class="new">NUEVO</span>
-                            </div>
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">Categoría</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            <div class="product-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="add-to-cart">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- /product -->
-
-                <div class="clearfix visible-sm visible-xs"></div>
-
-                <!-- product -->
-                <div class="col-md-3 col-xs-6">
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="./img/product03.png" alt="">
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">Categoría</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                            <div class="product-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                        </div>
-                        <div class="add-to-cart">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- /product -->
-
-                <!-- product -->
-                <div class="col-md-3 col-xs-6">
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="./img/product04.png" alt="">
                         </div>
                         <div class="product-body">
                             <p class="product-category">Categoría</p>

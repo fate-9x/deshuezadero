@@ -5,6 +5,16 @@ from appDeshuezadero.models import *
 register = template.Library()
 
 
+@register.filter(name="formatNumber")
+def formatNumber(number):
+
+    if type(number) != int and type(number) != float:
+        return number
+
+    d = {'.': ',', ',': '.'}
+    return ''.join(d.get(s, s) for s in f"{number:,.{0}f}")
+
+
 @register.filter(name="getCartCount")
 def getCartCount(user_id):
     return Carrito.objects.filter(user_id=user_id).count()
@@ -52,6 +62,13 @@ def getFotoRepuesto(producto_id):
 
     fotos = RepuestoFotos.objects.filter(
         repuesto_id=producto_id)
+
+    return fotos.get().foto
+
+
+@register.filter(name="getFotoAuto")
+def getFotoAuto(auto_id):
+    fotos = AutoFotos.objects.filter(auto_id=auto_id)
 
     return fotos.get().foto
 

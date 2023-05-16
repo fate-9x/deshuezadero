@@ -18,6 +18,7 @@ def formulario_login(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('/')
     form = Formulario_Login(request.POST or None)
+    mensaje = ''
     if request.method == 'POST':
         if form.is_valid:
             user = authenticate(
@@ -29,9 +30,8 @@ def formulario_login(request):
                 request.session['users_metadata_id'] = usersMetadata.id
                 return HttpResponseRedirect('/')
             else:
-                messages.add_message(
-                    request, messages.WARNING, f'Los datos ingresados no son correctos, Por favor intentelo nuevamente.')
-    return render(request, 'account/login.html', {'form': form})
+                mensaje = f'Los datos ingresados no son correctos, intentelo nuevamente.'
+    return render(request, 'account/login.html', {'form': form,  'mensaje': mensaje})
 
 
 def formulario_register(request):
@@ -70,7 +70,7 @@ def formulario_register(request):
                                            tipo_cliente_id=request.POST['tipo_cliente'])
                     return HttpResponseRedirect('/account/login/')
 
-    return render(request, 'account/register.html', {'form': form, })
+    return render(request, 'account/register.html', {'form': form})
 
 
 def logout_account(request):
