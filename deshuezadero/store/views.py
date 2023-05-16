@@ -104,3 +104,37 @@ def form_repuestos(request):
 
     else:
         return HttpResponseRedirect('/')
+
+
+def crudRepuestos(request):
+
+    repuestos = Repuesto.objects.filter(vendedor_id=request.user.id)
+
+    return render(request, 'store/crud_repuestos.html', {'repuestos': repuestos})
+
+
+def deleteRepuesto(request, producto_id):
+
+    try:
+        repuesto = Repuesto.objects.filter(
+            id=producto_id, vendedor_id=request.user.id).delete()
+
+        RepuestoFotos.objects.filter(repuesto_id=repuesto.id).delete()
+    except Exception as e:
+
+        repuesto = Repuesto.objects.filter(
+            id=producto_id, vendedor_id=request.user.id)
+
+        Carrito.objects.filter(producto_id=repuesto.get().id).delete()
+
+        try:
+            RepuestoFotos.objects.filter(
+                repuesto_id=repuesto.get().id).delete()
+
+            repuesto.delete()
+            HttpResponseRedirect('/store/crud-repuestos/')
+
+        except RepuestoFotos.DoesNotExist:
+            HttpResponseRedirect('/store/crud-repuestos/')
+
+    return HttpResponseRedirect('/store/crud-repuestos/')

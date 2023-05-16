@@ -1,0 +1,119 @@
+{% extends '../layout/base.html' %}
+{% load static %}
+{% load utilidades %}
+{% block content %}
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <form method="post" action="{{url}}">
+                    <input type="hidden" name="token_ws" value="{{token}}" />
+                    {% csrf_token %}
+
+                
+                <div class="col-md-7">
+                    <!-- Billing Details -->
+                    <div class="billing-details">
+                        <div class="section-title">
+                            <h3 class="title">Dirección de envío</h3>
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="first-name" placeholder="Primer Nombre">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="last-name" placeholder="Apellido">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="email" name="email" placeholder="Gmail">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="address" placeholder="Dirección">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="city" placeholder="Ciudad">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="comuna" placeholder="Comuna">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="tel" name="tel" placeholder="Teléfono">
+                        </div>
+                    </div>
+                
+                    <!-- /Billing Details -->
+
+                    <!-- Shiping Details -->
+
+                    <!-- /Shiping Details -->
+
+                    <!-- Order notes -->
+                    <div class="order-notes">
+                        <textarea class="input" placeholder="Pedidos"></textarea>
+                    </div>
+                    <!-- /Order notes -->
+                </div>
+
+                <!-- Order Details -->
+                <div class="col-md-5 order-details">
+                    <div class="section-title text-center">
+                        <h3 class="title">Tu pedido</h3>
+                    </div>
+                    <div class="order-summary">
+                        <div class="order-col">
+                            <div><strong>PRODUCTO</strong></div>
+                            <div><strong>TOTAL</strong></div>
+                        </div>
+                        <div class="order-products">
+                            {% for item in carrito %}
+                            
+                            <div class="order-col">
+                                <div>{{item.cantidad}}x {{item.nombre}}</div>
+                                <div>${{item.suma}}</div>
+                            </div>
+                            
+                            {% endfor %}
+                        <div class="order-col">
+                            <div><strong>TOTAL</strong></div>
+                            <div><strong class="order-total">${{total}}</strong></div>
+                        </div>
+                    </div>
+                    <div class="payment-method">
+                        <div class="input-radio">
+                            <input type="radio" name="payment" id="payment-1">
+                            <label for="payment-1">
+									<span></span>
+									Envío con grua
+								</label>
+                            <div class="caption">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="terms">
+                            <label for="terms">
+								<span></span>
+								Acepto los <a href="#">Términos y condiciones</a>
+							</label>
+                        </div>
+                        <input type="submit" class="primary-btn order-submit">Realizar pedido</input>
+                    </div>
+
+                </form>
+                    <!-- /Order Details -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /SECTION -->
+
+        <!-- NEWSLETTER -->
+        <br>
+        <!-- /NEWSLETTER -->
+
+{% endblock %}

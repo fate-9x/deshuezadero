@@ -127,7 +127,8 @@ class HistorialPago(models.Model):
     token = models.CharField(max_length=64)
     cliente = models.ForeignKey(Cliente, models.DO_NOTHING)
     tipo_pago = models.ForeignKey(TipoPago, models.DO_NOTHING)
-    valor_neto = models.CharField(max_length=11, null=False)
+    telefono = models.IntegerField()
+    valor_neto = models.IntegerField()
 
     def __str__(self):
         return self.cliente
