@@ -1,6 +1,14 @@
 {% extends '../layout/base.html' %}
 {% load static %}
+{% load utilidades %}
 {% block content %}
+
+        <!--Whatsapp-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <a id="whatsapp" href="https://api.whatsapp.com/send?phone=5195508107&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
+            <i class="fa fa-whatsapp my-float"></i>
+            </a>
+            <!--/Whatsapp-->
 
     <!-- SECTION -->
     <div class="section">
@@ -46,7 +54,7 @@
                             <a class="review-link" href="#">10 reseña(s) | Añade tu reseña</a> {% endcomment %}
                         </div>
                         <div>
-                            <h3 class="product-price">{{producto.precio|formatNumber}}{% comment %} <del class="product-old-price">$990.00</del>{% endcomment %}</h3>
+                            <h3 class="product-price">${{producto.precio|formatNumber}}{% comment %} <del class="product-old-price">$990.00</del>{% endcomment %}</h3>
 
                             {% if producto.stock > 0 %}
                             
@@ -81,7 +89,7 @@
                                 {% csrf_token %}
                             <div class="qty-label">
                                 Cantidad
-                                <div class="input-number">
+                                <div class="input-number texto-negro">
                                     <input name="cantidad" id="cantidad" value="1" type="number">
                                     <span class="qty-up">+</span>
                                     <span class="qty-down">-</span>
@@ -95,9 +103,8 @@
                         </div>
 
                         <ul class="product-links">
-                            <li>Categoría:</li>
-                            <li><a href="#">Headphones</a></li>
-                            <li><a href="#">Accessories</a></li>
+                            <li>Tipo Repuesto:</li>
+                            <li><a href="#">{{producto.tipo_repuesto}}</a></li>
                         </ul>
 
                     </div>

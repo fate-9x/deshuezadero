@@ -30,6 +30,9 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
 
+    <!--whatsapp-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/WhatsApp.css' %}" />
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -148,7 +151,7 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                                <div class="cart-summary">
+                                <div class="cart-summary texto-negro">
                                     <small>{{user.id|getItemsCount}} Item(s) seleccionados</small>
                                     <h5>SUBTOTAL: ${{user.id|getSubTotal}}</h5>
                                 </div>
@@ -231,6 +234,8 @@
     {% block content %}
 
     {% endblock %}
+
+    
 
     <!-- FOOTER -->
     <footer id="footer">

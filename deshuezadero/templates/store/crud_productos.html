@@ -13,22 +13,18 @@
                 <div class="product">
                     <div class="product-img">
                         <img src="{% static item.id|getFotoRepuesto %}" alt="">
-                        <div class="product-label">
-                            <span class="sale">-30%</span>
-                            <span class="new">NUEVO</span>
-                        </div>
                     </div>
                     <div class="product-body">
-                        <p class="product-category">Categoría</p>
+                        <p class="product-category">{{item.tipo_repuesto}}</p>
                         <h3 class="product-name"><a href="#">{{item.nombre}}</a></h3>
-                        <h4 class="product-price">${{item.precio}}{% comment %} <del class="product-old-price">$990.00</del>{% endcomment %}</h4> 
-                        <div class="product-rating">
+                        <h4 class="product-price">${{item.precio|formatNumber}}{% comment %} <del class="product-old-price">$990.00</del>{% endcomment %}</h4> 
+                        {% comment %} <div class="product-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
                     <div class="add-to-cart">
                         <a href="{% url 'modificar_repuesto' item.id %}" >
@@ -49,22 +45,18 @@
                 <div class="product">
                     <div class="product-img">
                         <img src="{% static item.id|getFotoAuto %}" alt="">
-                        <div class="product-label">
-                            <span class="sale">-30%</span>
-                            <span class="new">NUEVO</span>
-                        </div>
                     </div>
                     <div class="product-body">
-                        <p class="product-category">Categoría</p>
+                        <p class="product-category">{{item.marca}}</p>
                         <h3 class="product-name"><a href="#">{{item.modelo}}</a></h3>
-                        <h4 class="product-price">${{item.precio}}{% comment %} <del class="product-old-price">$990.00</del>{% endcomment %}</h4> 
-                        <div class="product-rating">
+                        <h4 class="product-price">${{item.precio|formatNumber}}{% comment %} <del class="product-old-price">$990.00</del>{% endcomment %}</h4> 
+                        {% comment %} <div class="product-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
                     <div class="add-to-cart">
                         <a href="{% url 'modificar_auto' item.id %}" >
