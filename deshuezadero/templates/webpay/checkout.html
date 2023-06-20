@@ -17,31 +17,28 @@
                     <!-- Billing Details -->
                     <div class="billing-details">
                         <div class="section-title">
-                            <h3 class="title">Dirección de envío</h3>
+                            <h3 class="title">Informacion</h3>
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="first-name" placeholder="Primer Nombre">
+                            <input class="input" type="text" name="rut" placeholder="Rut">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="first-name" placeholder="Nombre">
                         </div>
                         <div class="form-group">
                             <input class="input" type="text" name="last-name" placeholder="Apellido">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="email" name="email" placeholder="Gmail">
+                            <input class="input" type="text" name="address" placeholder="Correo">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="address" placeholder="Dirección">
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="text" name="city" placeholder="Ciudad">
+                            <input class="input" type="text" name="city" placeholder="Region">
                         </div>
                         <div class="form-group">
                             <input class="input" type="text" name="comuna" placeholder="Comuna">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="tel" name="tel" placeholder="Teléfono">
+                            <input class="input" type="text" name="tel" placeholder="Teléfono">
                         </div>
                     </div>
                 
@@ -50,12 +47,6 @@
                     <!-- Shiping Details -->
 
                     <!-- /Shiping Details -->
-
-                    <!-- Order notes -->
-                    <div class="order-notes">
-                        <textarea class="input" placeholder="Pedidos"></textarea>
-                    </div>
-                    <!-- /Order notes -->
                 </div>
 
                 <!-- Order Details -->
@@ -83,23 +74,6 @@
                         </div>
                     </div>
                     <div class="payment-method">
-                        <div class="input-radio">
-                            <input type="radio" name="payment" id="payment-1">
-                            <label for="payment-1">
-									<span></span>
-									Envío con grua
-								</label>
-                            <div class="caption">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="terms">
-                            <label for="terms">
-								<span></span>
-								Acepto los <a href="#">Términos y condiciones</a>
-							</label>
-                        </div>
                         <input type="submit" class="primary-btn order-submit" value="Realizar Pedido" ></input>
                     </div>
 
@@ -115,5 +89,5 @@
         <!-- NEWSLETTER -->
         <br>
         <!-- /NEWSLETTER -->
-
+    </div>
 {% endblock %}

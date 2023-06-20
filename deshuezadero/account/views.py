@@ -30,7 +30,8 @@ def formulario_login(request):
                 request.session['users_metadata_id'] = usersMetadata.id
                 return HttpResponseRedirect('/')
             else:
-                mensaje = f'Los datos ingresados no son correctos, intentelo nuevamente.'
+                mensaje = f"El correo o la contraseña son incorrectos."
+                messages.add_message(request, messages.ERROR, mensaje)
     return render(request, 'account/login.html', {'form': form,  'mensaje': mensaje})
 
 
@@ -38,16 +39,29 @@ def formulario_register(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('/')
 
-    form = Formulario_Registro(request.POST or None)
     if request.method == 'POST':
 
+        form = Formulario_Registro(request.POST or None)
+
         if form.is_valid:
-            exist = User.objects.filter(
+            existCorreo = User.objects.filter(
                 username=request.POST['correo']).count()
 
-            if exist != 0:
+            existRut = Cliente.objects.filter(
+                rut=request.POST['rut']).count()
+
+            if existCorreo != 0:
                 mensaje = f"El correo ingresado ya existe, por favor ingrese un nuevo correo."
                 messages.add_message(request, messages.WARNING, mensaje)
+
+            elif existRut != 0:
+                mensaje = f"El rut ingresado ya existe, por favor ingrese un nuevo rut."
+                messages.add_message(request, messages.WARNING, mensaje)
+
+            elif request.POST['password'] != request.POST['password2']:
+                mensaje = f"Las contraseñas ingresadas no coinciden, por favor ingrese nuevamente las contraseñas."
+                messages.add_message(request, messages.WARNING, mensaje)
+
             else:
 
                 comuna = Comuna.objects.filter(
@@ -64,12 +78,16 @@ def formulario_register(request):
                                                  last_name=request.POST['apellido'],
                                                  is_active=1)
                     Cliente.objects.create(correo=request.POST['correo'],
+                                           rut=request.POST['rut'],
                                            user_id=u.id,
                                            genero_id=request.POST['genero'],
                                            comuna_id=comuna.id,
                                            tipo_cliente_id=request.POST['tipo_cliente'])
-                    return HttpResponseRedirect('/account/login/')
 
+                    mensaje = f"El usuario {request.POST['correo']} ha sido creado con éxito, por favor inicie sesión."
+                    messages.add_message(request, messages.SUCCESS, mensaje)
+
+    form = Formulario_Registro()
     return render(request, 'account/register.html', {'form': form})
 
 

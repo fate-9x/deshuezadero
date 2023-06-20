@@ -48,13 +48,26 @@
                             <!-- tab -->
                             <div id="tab1" class="tab-pane active">
                                 <div class="products-slick" data-nav="#slick-nav-1">
+
+                                    
+                                    {% if autosBool %}
+                                    
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="product">
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a href="#">No hay Autos</a></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                    {% else %}
                                     
 
                                     {% for auto in autos %}
                                     <!-- product -->
                                     <div class="product">
                                         <div class="product-img">
-                                            <img src="{% static auto.id|getFotoAuto %}" alt="">
+                                            <img src="{% static auto.patente|getFotoAuto %}" alt="">
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category">{{auto.marca}}</p>
@@ -69,7 +82,7 @@
                                             </div> {% endcomment %}
                                         </div>
                                         <div class="add-to-cart">
-                                            <a href="{% url 'store_auto' auto.id %}" class="add-to-cart-btn"><i><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#D10024" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <a href="{% url 'store_auto' auto.patente %}" class="add-to-cart-btn"><i><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#D10024" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                 <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
                                                 <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
@@ -81,6 +94,8 @@
                                     </div>
                                     <!-- /product -->
                                     {% endfor %}
+
+                                    {% endif %}
                                 </div>
                                 <div id="slick-nav-1" class="products-slick-nav">
                                 </div>
@@ -125,6 +140,19 @@
                             <!-- tab -->
                             <div id="tab2" class="tab-pane fade in active">
                                 <div class="products-slick">
+
+                                    {% if repuestosBool %}
+                                    
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="product">
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a href="#">No hay Repuestos</a></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                    {% else %}
+
                                     {% for repuesto in repuestos %}
                                     <!-- product -->
                                     <div class="product">
@@ -156,6 +184,8 @@
                                     </div>
                                     <!-- /product -->
                                     {% endfor %}
+                                        
+                                    {% endif %}
                                 </div>
                                 <div id="slick-nav-2" class="products-slick-nav"></div>
                             </div>

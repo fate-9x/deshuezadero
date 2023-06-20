@@ -49,6 +49,8 @@ def transaction(request):
         "Content-Type": "application/json"
     }
 
+    return render(request, "webpay/pago_exitoso.html")
+
     response = requests.put(url, headers=headers)
     response_json = response.json()
     status = response_json.get("status")

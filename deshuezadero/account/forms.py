@@ -5,16 +5,6 @@ from appDeshuezadero.models import *
 from utilidades import utilidades as ut
 
 
-generos = []
-tipos_clientes = []
-
-for genero in Genero.objects.all():
-    generos.append((genero.id, genero.nombre))
-
-for tipo_cliente in TipoCliente.objects.all():
-    tipos_clientes.append((tipo_cliente.id, tipo_cliente.tipo))
-
-
 class Formulario_Login(forms.Form):
     correo = forms.EmailField(required=True, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Correo', 'autocomplete': 'off'}))
@@ -24,6 +14,11 @@ class Formulario_Login(forms.Form):
 
 
 class Formulario_Registro(forms.Form):
+
+    generos, tipos_clientes = ut.formularioRegistroChoices()
+
+    rut = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Rut', 'autocomplete': 'off'}))
 
     nombre = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Nombre', 'autocomplete': 'off'}))

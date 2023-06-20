@@ -7,6 +7,18 @@
     <div class="container">
         <div class="row">
 
+            {% if isEmpty %}
+
+            <div class="col-md-12 col-xs-12">
+                <div class="product">
+                    <div class="product-body">
+                        <h3 class="product-name"><a href="#">No hay datos</a></h3>
+                    </div>
+                </div>
+            </div>
+
+            {% else %}
+
             {% for item in repuestos %}
 
             <div class="col-md-4 col-xs-6">
@@ -44,7 +56,7 @@
             <div class="col-md-4 col-xs-6">
                 <div class="product">
                     <div class="product-img">
-                        <img src="{% static item.id|getFotoAuto %}" alt="">
+                        <img src="{% static item.patente|getFotoAuto %}" alt="">
                     </div>
                     <div class="product-body">
                         <p class="product-category">{{item.marca}}</p>
@@ -59,10 +71,10 @@
                         </div> {% endcomment %}
                     </div>
                     <div class="add-to-cart">
-                        <a href="{% url 'modificar_auto' item.id %}" >
+                        <a href="{% url 'modificar_auto' item.patente %}" >
                             <i class="add-to-cart-btn" >Editar</i>
                         </a>
-                        <a href="{% url 'delete_auto' item.id %}" >
+                        <a href="{% url 'delete_auto' item.patente %}" >
                             <i class="add-to-cart-btn" >Eliminar</i>
                         </a>
                     </div>
@@ -70,6 +82,8 @@
             </div>
             
             {% endfor %}
+
+            {% endif %}
 
 
 

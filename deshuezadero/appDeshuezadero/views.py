@@ -11,7 +11,7 @@ def home(request):
 
     autos = Auto.objects.all()
 
-    return render(request, 'home/index.html', {'repuestos': repuestos, 'autos': autos})
+    return render(request, 'home/index.html', {'repuestos': repuestos, 'autos': autos, 'repuestosBool': repuestos.count() == 0, 'autosBool': autos.count() == 0})
 
 
 def nosotros(request):

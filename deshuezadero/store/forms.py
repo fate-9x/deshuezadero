@@ -4,13 +4,10 @@ from django.forms import ModelForm, PasswordInput
 from appDeshuezadero.models import *
 from utilidades import utilidades as ut
 
-tipos_repuestos = []
-
-for tipos in TipoRepuesto.objects.all():
-    tipos_repuestos.append((tipos.id, tipos.tipo))
-
 
 class Formulario_Repuestos(forms.Form):
+
+    tipos_repuestos = ut.formularioStoreChoices()
 
     foto = forms.ImageField(widget=forms.FileInput())
 
@@ -48,3 +45,14 @@ class Formulario_Auto(forms.Form):
 
     precio = forms.IntegerField(
         widget=forms.NumberInput(attrs={'class': 'form-control', 'value': '0'}))
+
+
+class Formulario_Reportes(forms.Form):
+
+    razones = ut.formularioReportesChoices()
+
+    descripcion = forms.CharField(widget=forms.Textarea(
+        attrs={'class': 'form-control', 'autocomplete': 'off', 'style': 'background-color: #0f1416; border-radius: 10px; resize: none;'}))
+
+    razon = forms.ChoiceField(widget=forms.Select(
+        attrs={'class': 'form-select input-select'}), choices=razones)

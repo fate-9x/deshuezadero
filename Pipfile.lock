@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "53c11c064a6684e9ebfa0e5cd6ee6fc06fe84c9dc607e60ee5ba940d55d34bf9"
+            "sha256": "5deadea1f69f7fb30d1383ba98f3e8e9b9226b56487e962db6a306a8004a514b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -224,6 +224,14 @@
             "index": "pypi",
             "version": "==1.9.9"
         },
+        "django-jazzmin": {
+            "hashes": [
+                "sha256:5bb07055cf19183030724f976904fd8b6337559727959340a43832fab0531812",
+                "sha256:fb554c2d564649c65243b13385121fdbdda58521f49544f9d7cb9c414a4908d4"
+            ],
+            "index": "pypi",
+            "version": "==2.6.0"
+        },
         "django-rest-framework": {
             "hashes": [
                 "sha256:47a8f496fa69e3b6bd79f68dd7a1527d907d6b77f009e9db7cf9bb21cc565e4a"
@@ -263,10 +271,10 @@
             "version": "==3.17.0"
         },
         "mysqlclient": {
-            "file": "file:///C:/Users/lucas/OneDrive/Documentos/Progra/Integracion/mysqlclient-1.4.6-cp37-cp37m-win_amd64.whl",
             "hashes": [
                 "sha256:683269b350813b3d593e290e0d565b0de6bcd7f8b3c5cec3025260b3dfcd3b57"
             ],
+            "path": "./mysqlclient-1.4.6-cp37-cp37m-win_amd64.whl",
             "version": "==1.4.6"
         },
         "packaging": {

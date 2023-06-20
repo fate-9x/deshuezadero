@@ -126,6 +126,18 @@
                     <div class="row">
                         <!-- product -->
 
+                        {% if isEmpty %}
+
+                        <div class="col-md-12 col-xs-12">
+                            <div class="product">
+                                <div class="product-body">
+                                    <h3 class="product-name"><a href="#">No hay Repuestos</a></h3>
+                                </div>
+                            </div>
+                        </div>
+            
+                        {% else %}
+
                         {% for producto in productos %}
                         
                         <div class="col-md-4 col-xs-6">
@@ -160,6 +172,8 @@
                         </div>
                         
                         {% endfor %}
+
+                        
                         
                         <!-- /product -->
                     </div>
@@ -176,6 +190,8 @@
                         </ul>
                     </div>
                     <!-- /store bottom filter -->
+                        
+                    {% endif %}
                 </div>
                 <!-- /STORE -->
             </div>

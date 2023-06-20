@@ -11,14 +11,27 @@
                 <div class="col-lg-12 login-key">
                     <i class="fa fa-key" aria-hidden="true"></i>
                 </div>
+                
                 <div class="col-lg-12 login-title">
                     Registro
                 </div>
 
                 <div class="col-lg-12 login-form">
                     <div class="col-lg-12 login-form">
+                            <!-- Message -->
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert {{ message.tags }} alert-dismissiblle" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
                         <form name="form_register" method="post" action="{% url 'formulario_register' %}">
                             {% csrf_token %}
+                            <div class="form-group">
+                                <label class="form-control-label">Rut</label>
+                                {{form.rut}}
+                            </div>
                             <div class="form-group">
                                 <label class="form-control-label">Nombre</label>
                                 {{form.nombre}}
@@ -107,10 +120,7 @@
                                 {{form.password2}}
                             </div>
 
-                            <div class="col-lg-12 loginbttm">
-                                <div class="col-lg-6 login-btm login-text">
-                                    <!-- Error Message -->
-                                </div>
+                            <div class="col-lg-12 loginbtn">
                                 <div class="col-lg-6 login-btm login-button">
                                     <button type="submit" class="btn btn-outline-primary">Registrarse</button>
                                 </div>
@@ -119,11 +129,13 @@
 
                     </div>
                 </div>
+                
                 <div class="info_div">
                     <p>Ya tienes un cuenta? <a href="{% url 'formulario_login' %}" class="info_div_link">Ingresa aquí!</a></p>
                 </div>
                 <div class="col-lg-3 col-md-2"></div>
             </div>
+            
         </div>
-
+    </div>
 {% endblock %}

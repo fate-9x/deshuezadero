@@ -1,5 +1,6 @@
 from django.shortcuts import *
 from appDeshuezadero.models import *
+from django.contrib import messages
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from .forms import *
 # Create your views here.
@@ -9,14 +10,14 @@ def store_repuestos(request):
 
     productos = Repuesto.objects.all()
 
-    return render(request, 'store/store_repuestos.html', {'productos': productos})
+    return render(request, 'store/store_repuestos.html', {'productos': productos, 'isEmpty': productos.count() == 0})
 
 
 def store_autos(request):
 
     autos = Auto.objects.all()
 
-    return render(request, 'store/store_autos.html', {'autos': autos})
+    return render(request, 'store/store_autos.html', {'autos': autos, 'isEmpty': autos.count() == 0})
 
 
 def repuestoView(request, id):
@@ -28,9 +29,9 @@ def repuestoView(request, id):
     return render(request, 'store/product.html', {'producto': producto.get(), 'producto_fotos': producto_fotos.get()})
 
 
-def autoView(request, id):
-    auto = Auto.objects.filter(id=id)
-    auto_fotos = AutoFotos.objects.filter(auto_id=id)
+def autoView(request, patente):
+    auto = Auto.objects.filter(patente=patente)
+    auto_fotos = AutoFotos.objects.filter(auto_id=patente)
 
     return render(request, 'store/auto.html', {'auto': auto.get(), 'auto_fotos': auto_fotos.get()})
 
@@ -43,25 +44,25 @@ def createCart(request):
             try:
                 if request.POST['modelo'] != None:
                     auto = Auto.objects.filter(
-                        id=request.POST['id']).get()
+                        patente=request.POST['patente']).get()
 
                     try:
                         item = Carrito.objects.filter(
-                            auto_id=request.POST['id'], user_id=request.user.id)
+                            auto_id=request.POST['patente'], user_id=request.user.id)
 
                         if item.count() > 0:
                             return HttpResponseRedirect('/store/cart/')
 
                         else:
                             Carrito.objects.create(
-                                cantidad=1, auto_id=request.POST['id'], user_id=request.user.id, precio=auto.precio, suma=auto.precio, nombre=request.POST['modelo'])
+                                cantidad=1, auto_id=request.POST['patente'], user_id=request.user.id, precio=auto.precio, suma=auto.precio, nombre=request.POST['modelo'])
 
                         return HttpResponseRedirect('/store/cart/')
 
                     except Carrito.DoesNotExist:
 
                         Carrito.objects.create(
-                            cantidad=1, auto_id=request.POST['id'], user_id=request.user.id, precio=auto.precio, suma=auto.precio, nombre=request.POST['modelo'])
+                            cantidad=1, auto_id=request.POST['patente'], user_id=request.user.id, precio=auto.precio, suma=auto.precio, nombre=request.POST['modelo'])
                         return HttpResponseRedirect('/store/cart/')
             except Exception as e:
 
@@ -128,7 +129,8 @@ def form_repuestos(request):
 
                     repuesto.save()
 
-                    return HttpResponseRedirect('/store/repuestos/')
+                    mensaje = f"Repuesto creado con exito."
+                    messages.add_message(request, messages.SUCCESS, mensaje)
 
                 except Repuesto.DoesNotExist:
                     repuesto = request.POST
@@ -138,7 +140,8 @@ def form_repuestos(request):
                     RepuestoFotos.objects.create(
                         foto=request.FILES.get('foto'), repuesto_id=r.id)
 
-                    return HttpResponseRedirect('/store/repuestos/')
+                    mensaje = f"Repuesto creado con exito."
+                    messages.add_message(request, messages.SUCCESS, mensaje)
 
         return render(request, 'store/form_repuestos.html', {'form': form})
 
@@ -150,8 +153,8 @@ def form_auto(request):
 
     if request.user.is_authenticated:
 
-        form = Formulario_Auto(request.POST, request.FILES or None)
         if request.method == 'POST':
+            form = Formulario_Auto(request.POST, request.FILES or None)
 
             if form.is_valid:
 
@@ -167,12 +170,21 @@ def form_auto(request):
                     else:
                         auto = request.POST
                         r = Auto.objects.create(
-                            marca=auto['marca'], modelo=auto['modelo'], precio=auto['precio'], vin=auto['vin'], color=auto['color'], vendedor_id=request.user.id)
+                            patente=auto['patente'],
+                            marca=auto['marca'],
+                            modelo=auto['modelo'],
+                            precio=auto['precio'],
+                            vin=auto['vin'],
+                            color=auto['color'],
+                            vendedor_id=request.user.id
+                        )
 
                         AutoFotos.objects.create(
-                            foto=request.FILES.get('foto'), auto_id=r.id)
+                            foto=request.FILES.get('foto'), auto=r)
 
-                        return HttpResponseRedirect('/store/autos/')
+                        mensaje = f"Auto creado con exito."
+                        messages.add_message(
+                            request, messages.SUCCESS, mensaje)
 
                 except Auto.DoesNotExist:
 
@@ -183,7 +195,11 @@ def form_auto(request):
                     AutoFotos.objects.create(
                         foto=request.FILES.get('foto'), auto_id=r.id)
 
-                return HttpResponseRedirect('/store/repuestos/')
+                    mensaje = f"Auto creado con exito."
+                    messages.add_message(
+                        request, messages.SUCCESS, mensaje)
+
+        form = Formulario_Auto()
 
         return render(request, 'store/form_autos.html', {'form': form})
     else:
@@ -196,28 +212,28 @@ def crudProductos(request):
 
     autos = Auto.objects.filter(vendedor_id=request.user.id)
 
-    return render(request, 'store/crud_productos.html', {'repuestos': repuestos, 'autos': autos})
+    return render(request, 'store/crud_productos.html', {'repuestos': repuestos, 'autos': autos, 'isEmpty': autos.count() == 0 and repuestos.count() == 0})
 
 
-def deleteAuto(request, auto_id):
+def deleteAuto(request, patente):
     try:
         auto = Auto.objects.filter(
-            id=auto_id, vendedor_id=request.user.id).delete()
+            patente=patente, vendedor_id=request.user.id).delete()
 
-        AutoFotos.objects.filter(auto_id=auto.id).delete()
+        AutoFotos.objects.filter(auto_id=auto.patente).delete()
     except Exception as e:
 
         auto = Auto.objects.filter(
-            id=auto_id, vendedor_id=request.user.id)
-
-        Carrito.objects.filter(auto_id=auto.get().id).delete()
+            patente=patente, vendedor_id=request.user.id)
+        Carrito.objects.filter(auto_id=auto.get().patente).delete()
 
         try:
             AutoFotos.objects.filter(
-                auto_id=auto.get().id).delete()
+                auto_id=auto.get().patente).delete()
 
             auto.delete()
-            HttpResponseRedirect('/store/crud-productos/')
+            mensaje = f"Auto Eliminado con exito."
+            messages.add_message(request, messages.SUCCESS, mensaje)
 
         except AutoFotos.DoesNotExist:
             HttpResponseRedirect('/store/crud-productos/')
@@ -232,6 +248,9 @@ def deleteRepuesto(request, producto_id):
             id=producto_id, vendedor_id=request.user.id).delete()
 
         RepuestoFotos.objects.filter(repuesto_id=repuesto.id).delete()
+        mensaje = f"Repuesto Eliminado con exito."
+        messages.add_message(request, messages.SUCCESS, mensaje)
+
     except Exception as e:
 
         repuesto = Repuesto.objects.filter(
@@ -244,7 +263,8 @@ def deleteRepuesto(request, producto_id):
                 repuesto_id=repuesto.get().id).delete()
 
             repuesto.delete()
-            HttpResponseRedirect('/store/crud-productos/')
+            mensaje = f"Repuesto Eliminado con exito."
+            messages.add_message(request, messages.SUCCESS, mensaje)
 
         except RepuestoFotos.DoesNotExist:
             HttpResponseRedirect('/store/crud-productos/')
@@ -280,14 +300,15 @@ def modificarRepuesto(request, producto_id):
 
             rep_foto.save()
 
-            return HttpResponseRedirect('/store/repuestos/')
+            mensaje = f"Repuesto Modificado con exito."
+            messages.add_message(request, messages.SUCCESS, mensaje)
 
     return render(request, 'store/modificar_repuesto.html', {'repuesto': repuesto, 'form': form})
 
 
-def modificarAuto(request, auto_id):
+def modificarAuto(request, patente):
     auto = Auto.objects.get(
-        id=auto_id, vendedor_id=request.user.id)
+        patente=patente, vendedor_id=request.user.id)
 
     form = Formulario_Auto(request.POST, request.FILES or None)
 
@@ -296,7 +317,7 @@ def modificarAuto(request, auto_id):
         if form.is_valid:
 
             a = Auto.objects.filter(
-                id=auto_id, vendedor_id=request.user.id).get()
+                patente=patente, vendedor_id=request.user.id).get()
 
             a.marca = request.POST['marca']
             a.modelo = request.POST['modelo']
@@ -308,12 +329,56 @@ def modificarAuto(request, auto_id):
             a.save()
 
             a_foto = AutoFotos.objects.filter(
-                auto_id=auto_id).get()
+                auto_id=patente).get()
 
             a_foto.foto = request.FILES['foto']
 
             a_foto.save()
 
-            return HttpResponseRedirect('/store/autos/')
+            mensaje = f"Auto Modificado con exito."
+            messages.add_message(request, messages.SUCCESS, mensaje)
 
     return render(request, 'store/modificar_auto.html', {'auto': auto, 'form': form})
+
+
+def reporteAuto(request, item_id):
+    if request.user.is_authenticated:
+
+        if request.method == 'POST':
+
+            print(request.POST['razon'])
+            form = Formulario_Reportes(request.POST)
+            if form.is_valid:
+
+                try:
+
+                    Reportes.objects.create(
+                        user_id=request.user.id,
+                        auto_id=item_id,
+                        repuesto_id=None,
+                        razon_id=request.POST['razon'],
+                        descripcion=request.POST['descripcion']
+                    )
+
+                    mensaje = f"Reporte enviado con exito."
+                    messages.add_message(request, messages.SUCCESS, mensaje)
+
+                except Exception as e:
+
+                    Repuesto.objects.filter(
+                        id=item_id).get()
+
+                    Reportes.objects.create(
+                        user_id=request.user.id,
+                        auto_id=None,
+                        repuesto_id=item_id,
+                        razon_id=request.POST['razon'],
+                        descripcion=request.POST['descripcion']
+                    )
+                    mensaje = f"Reporte enviado con exito."
+                    messages.add_message(request, messages.SUCCESS, mensaje)
+
+        form = Formulario_Reportes()
+        return render(request, 'store/form_reportes.html', {'form': form, 'item_id': item_id})
+    else:
+        return HttpResponseRedirect("/")

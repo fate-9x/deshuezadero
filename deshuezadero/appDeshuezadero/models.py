@@ -4,20 +4,6 @@ from autoslug import AutoSlugField
 # Create your models here.
 
 
-class Estado(models.Model):
-    # id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=50)
-    slug = AutoSlugField(populate_from='nombre')
-
-    def __str__(self):
-        return self.nombre
-
-    class Meta:
-        db_table = 'estado'
-        verbose_name = 'Estado'
-        verbose_name_plural = 'Estados'
-
-
 class Genero(models.Model):
     nombre = models.CharField(max_length=15)
 
@@ -106,6 +92,7 @@ class TipoPago(models.Model):
 
 class Cliente(models.Model):
     user = models.ForeignKey(User, models.DO_NOTHING, null=False)
+    rut = models.CharField(max_length=10, null=False, default="0-0")
     telefono = models.CharField(max_length=9, null=True)
     correo = models.CharField(max_length=50, null=False)
     genero = models.ForeignKey(Genero, models.DO_NOTHING, null=True)
@@ -114,7 +101,7 @@ class Cliente(models.Model):
         TipoCliente, models.DO_NOTHING)
 
     def __str__(self):
-        return self.nombre
+        return self.rut
 
     class Meta:
         db_table = 'cliente'
@@ -130,7 +117,7 @@ class HistorialPago(models.Model):
     valor_neto = models.IntegerField()
 
     def __str__(self):
-        return self.cliente
+        return self.token
 
     class Meta:
         db_table = 'historial_pago'
@@ -140,11 +127,11 @@ class HistorialPago(models.Model):
 
 class Auto(models.Model):
 
+    patente = models.CharField(max_length=100, null=False, primary_key=True)
     marca = models.CharField(max_length=100, null=False)
     modelo = models.CharField(max_length=100, null=False)
     color = models.CharField(max_length=100, null=False)
     vin = models.CharField(max_length=100, null=True)
-    patente = models.CharField(max_length=100, null=False)
     precio = models.IntegerField()
     vendedor = models.ForeignKey(Cliente, models.DO_NOTHING, null=True)
 
@@ -163,9 +150,6 @@ class AutoFotos(models.Model):
         upload_to="uploads/autos", default="/")
 
     auto = models.ForeignKey(Auto, models.DO_NOTHING)
-
-    def __str__(self):
-        return self.auto
 
     class Meta:
         db_table = 'auto_foto'
@@ -218,20 +202,6 @@ class RepuestoFotos(models.Model):
         verbose_name_plural = 'FotosRepuestos'
 
 
-class PermisoCirculacion(models.Model):
-
-    tipo_permiso = models.CharField(max_length=50, null=False)
-    auto = models.ForeignKey(Auto, models.DO_NOTHING, null=True)
-
-    def __str__(self):
-        return self.tipo_permiso
-
-    class Meta:
-        db_table = 'permiso_circulacion'
-        verbose_name = 'PermisoCirculacion'
-        verbose_name_plural = 'PermisosCirculacion'
-
-
 class Carrito(models.Model):
 
     user = models.ForeignKey(Cliente, models.DO_NOTHING, null=True)
@@ -249,3 +219,33 @@ class Carrito(models.Model):
         db_table = 'Carrito'
         verbose_name = 'carrito'
         verbose_name_plural = 'carritos'
+
+
+class RazonesReportes(models.Model):
+
+    razon = models.CharField(max_length=50, null=False)
+
+    def __str__(self):
+        return self.razon
+
+    class Meta:
+        db_table = 'razones_reportes'
+        verbose_name = 'RazonesReporte'
+        verbose_name_plural = 'RazonesReportes'
+
+
+class Reportes(models.Model):
+
+    user = models.ForeignKey(Cliente, models.DO_NOTHING, null=False)
+    auto = models.ForeignKey(Auto, models.DO_NOTHING, null=True)
+    repuesto = models.ForeignKey(Repuesto, models.DO_NOTHING, null=True)
+    razon = models.ForeignKey(RazonesReportes, models.DO_NOTHING, null=False)
+    descripcion = models.CharField(max_length=200, null=False)
+
+    def __str__(self):
+        return self.descripcion
+
+    class Meta:
+        db_table = 'reportes'
+        verbose_name = 'Reporte'
+        verbose_name_plural = 'Reportes'

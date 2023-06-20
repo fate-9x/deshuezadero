@@ -126,13 +126,25 @@
                     <div class="row">
                         <!-- product -->
 
+                        {% if isEmpty %}
+
+                        <div class="col-md-12 col-xs-12">
+                            <div class="product">
+                                <div class="product-body">
+                                    <h3 class="product-name"><a href="#">No hay Autos</a></h3>
+                                </div>
+                            </div>
+                        </div>
+            
+                        {% else %}
+
                         {% for auto in autos %}
                         
                         <div class="col-md-4 col-xs-6">
                             <div class="product">
                                 <div class="product-img">
                                     
-                                    <img src="{% static auto.id|getFotoAuto %}" alt="">
+                                    <img src="{% static auto.patente|getFotoAuto %}" alt="">
                                     
                                     {% comment %} <div class="product-label">
                                         <span class="sale">-30%</span>
@@ -151,7 +163,7 @@
                                     </div>
                                 </div>
                                 <div class="add-to-cart">
-                                    <a href="{% url 'store_auto' auto.id %}" >
+                                    <a href="{% url 'store_auto' auto.patente %}" >
                                         <i class="add-to-cart-btn" >Ver producto</i>
                                     </a>
                                 </div>
@@ -159,6 +171,8 @@
                         </div>
                         
                         {% endfor %}
+
+                        
                         
                         <!-- /product -->
                     </div>
@@ -175,6 +189,7 @@
                         </ul>
                     </div>
                     <!-- /store bottom filter -->
+                    {% endif %}
                 </div>
                 <!-- /STORE -->
             </div>

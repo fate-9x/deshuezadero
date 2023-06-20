@@ -62,7 +62,7 @@
                             <form name="agregar_al_carro" action="{% url 'create_cart' %}" method="post">
                                 {% csrf_token %}
 
-                                <input type="hidden" name="id" id="id" value="{{auto.id}}">
+                                <input type="hidden" name="patente" id="id" value="{{auto.patente}}">
                                 <input type="hidden" name="modelo" id="modelo" value="{{auto.modelo}}">
                                 <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>
                             </form>
@@ -73,6 +73,13 @@
                             <li><a href="#">{{auto.marca}}</a></li>
                         </ul>
 
+                        <ul class="product-links">
+                            <li><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff2825" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1 -7 0a5 5 0 0 0 -7 0v-9z" />
+                                <path d="M5 21v-7" />
+                              </svg><a href="{% url 'reportar_auto' auto.patente %}">Reportar</a></li>
+                        </ul>
                     </div>
                 </div>
                 <!-- /Product details -->

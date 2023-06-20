@@ -11,71 +11,51 @@
                     <i class="fa fa-key" aria-hidden="true"></i>
                 </div>
                 <div class="col-lg-12 login-title">
-                    Ingresar Repuesto
+                    Reportar auto
                 </div>
                 <div class="col-lg-12 login-form">
-                    {% if messages %}
+                    <div class="col-lg-12 login-form">
+                        {% if messages %}
                             {% for message in messages %}
                                 <div class="alert {{ message.tags }} alert-dismissiblle" role="alert">
                                     {{ message }}
                                 </div>
                             {% endfor %}
                         {% endif %}
-                    <div class="col-lg-12 login-form">
-                        <form name="form_repuestos" enctype="multipart/form-data" role="form" method="post" action="{% url 'form_repuestos' %}">
+                        <form name="reportar_auto" enctype="multipart/form-data" role="form" method="post" action="{% url 'reportar_auto' item_id %}">
                             
                             {% csrf_token %}
                             <div class="form-group">
-                                <label class="form-control-label">Foto</label>
+                                <label class="form-control-label">Razon</label>
 
-                                {{form.foto}}
+                                {{form.razon}}
 
                                 {% comment %} <input type="text" class="form-control"> {% endcomment %}
                             </div>
                             <div class="form-group">
-                                <label class="form-control-label">Nombre</label>
-
-                                {{form.nombre}}
-
-                                {% comment %} <input type="password" class="form-control" i> {% endcomment %}
-                            </div>
-                            <div class="form-group">
-                                <label class="form-control-label">Precio</label>
-
-                                {{form.precio}}
-
-                                {% comment %} <input type="password" class="form-control" i> {% endcomment %}
-                            </div>
-                            <div class="form-group">
-                                <label class="form-control-label">Stock</label>
-
-                                {{form.stock}}
-
-                                {% comment %} <input type="password" class="form-control" i> {% endcomment %}
-                            </div>
-                            <div class="form-group">
-                                <label class="form-control-label">Tipo de Repuesto</label>
+                                <label class="form-control-label">Descripcion</label>
                                 <br>
-                                {{form.tipo_repuesto}}
+                                {{form.descripcion}}
 
                                 {% comment %} <input type="password" class="form-control" i> {% endcomment %}
                             </div>
+
+                            
+
+                            
 
                             <div class="col-lg-12 loginbttm">
                                 <div class="col-lg-6 login-btm login-text">
                                     <!-- Error Message -->
                                 </div>
                                 <div class="col-lg-6 login-btm login-button">
-                                    <button type="submit" class="btn btn-outline-primary">Ingresar</button>
+                                    <button type="submit" class="btn btn-outline-primary">Reportar</button>
                                 </div>
                             </div>
-
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}

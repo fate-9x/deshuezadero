@@ -11,7 +11,7 @@ urlpatterns = [
     path('cart/', cart, name='store_cart'),
 
     path('repuesto/<int:id>', repuestoView, name='store_product'),
-    path('auto/<int:id>', autoView, name='store_auto'),
+    path('auto/<str:patente>', autoView, name='store_auto'),
 
     path('create-cart/', createCart, name='create_cart'),
 
@@ -22,14 +22,16 @@ urlpatterns = [
          deleteCart, name='delete_product'),
     path('delete-repuesto/<int:producto_id>/',
          deleteRepuesto, name='delete_repuesto'),
-    path('delete-auto/<int:auto_id>/',
+    path('delete-auto/<str:patente>/',
          deleteAuto, name='delete_auto'),
 
     path('modificar-repuesto/<int:producto_id>/',
          modificarRepuesto, name='modificar_repuesto'),
-    path('modificar-auto/<int:auto_id>/',
+    path('modificar-auto/<str:patente>/',
          modificarAuto, name='modificar_auto'),
 
+    path('reportar-auto/<str:item_id>/',
+         reporteAuto, name='reportar_auto'),
 
 
 

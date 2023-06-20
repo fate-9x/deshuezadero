@@ -2,7 +2,39 @@ from django.core.paginator import Paginator
 from django.conf import settings
 import os
 import jwt
-from appDeshuezadero.models import Carrito, Comuna
+from appDeshuezadero.models import *
+
+
+def formularioRegistroChoices():
+
+    generos = []
+    tipos_clientes = []
+
+    for genero in Genero.objects.all():
+        generos.append((genero.id, genero.nombre))
+
+    for tipo_cliente in TipoCliente.objects.all():
+        tipos_clientes.append((tipo_cliente.id, tipo_cliente.tipo))
+
+    return generos, tipos_clientes
+
+
+def formularioStoreChoices():
+    tipos_repuestos = []
+
+    for tipos in TipoRepuesto.objects.all():
+        tipos_repuestos.append((tipos.id, tipos.tipo))
+
+    return tipos_repuestos
+
+
+def formularioReportesChoices():
+    razones = []
+
+    for razon in RazonesReportes.objects.all():
+        razones.append((razon.id, razon.razon))
+
+    return razones
 
 
 def getToken(json):

@@ -1,18 +1,20 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Montserrat', sans-serif;
-    margin: 5rem;
+.content {
+    text-align: center;
+    padding: 50px 0;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border: 1rem solid rgb(0, 255, 42);
-    border-radius: 20rem;
-    padding: 2rem;
-    width: 50rem;
+.check-image {
+    width: 100px;
+    height: 100px;
+    /* Estilos adicionales para ajustar la posición o tamaño de la imagen */
+}
+
+.message {
+    font-size: 24px;
+    /* Estilos adicionales para ajustar el tamaño de la fuente o el espaciado */
+}
+
+footer {
+    padding: 20px;
+    /* Estilos adicionales para el pie de página, como alinear el botón o los enlaces */
 }
